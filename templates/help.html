@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="bg-[#1D1D1D] text-gray-100 py-32 min-h-screen">
+  <div class="container flex flex-col justify-center p-4 mx-auto md:p-8">
+    <h2 class="mb-12 text-4xl font-bold leadi text-center sm:text-5xl">Frequently Asked Questions</h2>
+    <div class="flex flex-col divide-y sm:px-8 lg:px-12 xl:px-32 divide-gray-700">
+      <details>
+        <summary class="py-2 outline-none cursor-pointer focus:underline">What is a credit score?</summary>
+        <div class="px-4 pb-4">
+          <p>A credit score is a numerical representation of your creditworthiness, typically ranging from 300 to 900. It helps lenders assess the risk of lending to you and is based on your credit history, outstanding debt, and other financial behavior.</p>
+        </div>
+      </details>
+      <details>
+        <summary class="py-2 outline-none cursor-pointer focus:underline">How is my credit score calculated?</summary>
+        <div class="px-4 pb-4">
+          <p>Your credit score is calculated using various factors such as your payment history, total debt, length of credit history, types of credit used, and the number of recent credit inquiries. Each factor contributes differently to your overall score.</p>
+        </div>
+      </details>
+      <details>
+        <summary class="py-2 outline-none cursor-pointer focus:underline">What information do I need to provide for a credit score prediction?</summary>
+        <div class="px-4 pb-4">
+          <p>To get an accurate credit score prediction, you will need to provide details such as your age, annual income, monthly salary, outstanding debt, number of bank accounts, and other relevant financial information.</p>
+        </div>
+      </details>
+      <details>
+        <summary class="py-2 outline-none cursor-pointer focus:underline">Will using the credit score prediction tool affect my actual credit score?</summary>
+        <div class="px-4 pb-4">
+          <p>No, using our credit score prediction tool will not affect your actual credit score. It is a simulation based on the data you provide and does not involve any inquiries on your official credit report.</p>
+        </div>
+      </details>
+      <details>
+        <summary class="py-2 outline-none cursor-pointer focus:underline">How accurate is the credit score prediction?</summary>
+        <div class="px-4 pb-4">
+          <p>Our credit score prediction tool uses advanced machine learning algorithms to provide highly accurate estimates based on the input data. However, the prediction is an estimate and may differ slightly from your official credit score.</p>
+        </div>
+      </details>
+      <details>
+        <summary class="py-2 outline-none cursor-pointer focus:underline">Can I improve my credit score?</summary>
+        <div class="px-4 pb-4">
+          <p>Yes, you can improve your credit score by making timely payments, reducing outstanding debt, avoiding unnecessary credit inquiries, and maintaining a healthy credit utilization ratio. Regularly reviewing your credit report can also help identify any errors that may impact your score.</p>
+        </div>
+      </details>
+      <details>
+        <summary class="py-2 outline-none cursor-pointer focus:underline">What should I do if I find errors in my credit report?</summary>
+        <div class="px-4 pb-4">
+          <p>If you find errors in your credit report, you should contact the credit bureau and the creditor to dispute the inaccuracies. Provide any necessary documentation to support your claim and follow up until the issue is resolved.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+{% endblock content %}

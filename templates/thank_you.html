@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div>
+<div class="bg-[url('{% static 'images/Project_Logo.png' %}')] bg-cover bg-center h-64 flex justify-center items-center text-white bg-opacity-60">
+    <section class="text-center p-8 bg-blue-900 bg-opacity-60 rounded-lg">
+        <h1 class="text-4xl font-bold mb-4">Thank You for Your Feedback!</h1>
+        <p class="text-lg">We appreciate your input and will get back to you soon.</p>
+    </section>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% load static %}
+
+{% block content %}
+<body class="font-poppins bg-gray-100">
+
+    <input type="checkbox" id="nav-toggle" class="hidden">
+    
+
+    <!-- Sidebar -->
+    <div class="sidebar bg-gradient-to-r from-purple-700 to-blue-600 w-64 fixed h-full transition-all">
+        <h1 class="text-black text-3xl font-semibold mb-8 px-6">Welcome, {{ user.username }}!</h1>
+        <div class="sidebar-brand text-white py-6 px-4 flex items-center">
+            <span class="lab la-accusoft text-3xl"></span>
+            <h1 class="text-2xl ml-4">Score_sense</h1>
+        </div>
+        <div class="sidebar-menu mt-8">
+            <ul>
+                <li>
+                    <a href="{% url 'dashboard' %}" class="flex items-center px-4 py-3 hover:bg-blue-700 text-white rounded-l-full transition-all">
+                        <span class="las la-grip-horizontal text-xl"></span>
+                        <span class="ml-4 text-lg">User Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'credit_form' %}" class="flex items-center px-4 py-3 hover:bg-blue-700 text-white rounded-l-full transition-all">
+                        <span class="lab la-wpforms text-xl"></span>
+                        <span class="ml-4 text-lg">Fill Credit Details</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'home' %}" class="flex items-center px-4 py-3 hover:bg-blue-700 text-white rounded-l-full transition-all">
+                        <span class="las la-home text-xl"></span>
+                        <span class="ml-4 text-lg">Home</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'loan_information' %}" class="flex items-center px-4 py-3 hover:bg-blue-700 text-white rounded-l-full transition-all">
+                        <span class="lab la-wpforms text-xl"></span>
+                        <span class="ml-4 text-lg">Loan Information</span>
+                    </a>
+                </li>
+
+                <li>
+                    <form action="{% url 'logout' %}" method="POST" id="logout">
+                        {% csrf_token %}
+                        <a href="javascript:{}" onclick="document.getElementById('logout').submit();" class="flex items-center px-4 py-3 hover:bg-blue-700 text-white rounded-l-full transition-all">
+                            <span class="las la-sign-out-alt text-xl"></span>
+                            <span class="ml-4 text-lg">Logout</span>
+                        </a>
+                    </form>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content ml-64 bg-gray-100 min-h-screen py-8 px-6">
+        
+
+        <div class="container mx-auto bg-white p-8 rounded-3xl shadow-xl transform transition-all hover:scale-105">
+            <div class="flex flex-col items-center">
+                <img src="{% static 'images\Manish_contact.jpg' %}" alt="Logo" class="object-cover w-40 h-40 mb-8 rounded-full shadow-lg transform transition-all hover:scale-110">
+
+                <!-- Credit Score -->
+                <div class="w-full max-w-2xl text-center mb-8">
+                    <h2 class="text-3xl font-semibold text-gray-900 mb-4">Your Credit Score</h2>
+                    {% if credit_score %}
+                        <p class="text-xl text-green-600 font-bold">Credit Score: <strong>{{ credit_score }}</strong></p>
+                    {% else %}
+                        <p class="text-xl text-gray-600">No credit score available. Please complete the form first.</p>
+                    {% endif %}
+                </div>
+
+                <!-- Previous Predictions -->
+                <div class="w-full max-w-2xl mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-900 mb-6">Your Previous Predictions</h3>
+
+                    {% if predictions %}
+                        <div class="space-y-6">
+                            {% for prediction in predictions %}
+                                <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-6 rounded-xl shadow-md text-white transform transition-all hover:scale-105 hover:shadow-xl">
+                                    <h4 class="text-xl font-medium">Name : {{ prediction.name }}</h4>
+                                    <p class="text-lg">Age: {{ prediction.age }}</p>
+                                    <p class="text-lg">Annual Income: ${{ prediction.annual_income }}</p>
+                                    <p class="text-lg">Credit Score: <strong>{{ prediction.predicted_credit_score }}</strong></p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="text-lg text-gray-600">No previous predictions available.</p>
+                    {% endif %}
+                </div>
+
+                <div class="container mx-auto mt-4 bg-white p-6 rounded shadow-md">
+                    <h2 class="text-3xl font-bold mb-6 text-black">Welcome, {{ user.username }}!</h2>
+                
+                    <!-- Display current credit score -->
+                    <div class="my-8">
+                        {% if credit_score %}
+                            <p class="text-xl text-black">Latest Credit Score: <strong>{{ credit_score }}</strong></p>
+                        {% else %}
+                            <p class="text-xl text-black">No credit score available. Please complete the form first.</p>
+                        {% endif %}
+                    </div>
+                
+                    <!-- Display Past Predictions -->
+                    <h3 class="text-2xl font-bold mt-8">Your Past Credit Scores</h3>
+                    <ul class="space-y-2 text-lg text-gray-600">
+                        {% for prediction in predictions %}
+                            <li>
+                                <span class="font-semibold">{{ prediction.date_submitted|date:"Y-m-d" }}:</span> 
+                                Age: {{ prediction.age }}, Annual Income: ${{ prediction.annual_income }},
+                                Credit Score: <strong>{{ prediction.predicted_credit_score }}</strong>
+                            </li>
+                        {% empty %}
+                            <p>No past predictions found.</p>
+                        {% endfor %}
+                    </ul>
+                
+                    <!-- Chart for Credit Score Trend -->
+                    <h3 class="text-2xl font-bold mt-8">Credit Score Trend</h3>
+                    <canvas id="creditScoreChart" width="400" height="200"></canvas>
+                </div>
+                
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    // Data from Django context
+                    const creditScores = JSON.parse('{{ credit_scores|safe }}');
+                    const dates = JSON.parse('{{ dates|safe }}');
+                                                
+                    // Chart.js code
+                    const ctx = document.getElementById('creditScoreChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: 'Credit Score Over Time',
+                                data: creditScores,
+                                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 2,
+                                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                                pointBorderColor: '#fff',
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: false
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    backgroundColor: 'rgba(0,0,0,0.7)',
+                                    titleFont: {
+                                        size: 16
+                                    },
+                                    bodyFont: {
+                                        size: 14
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
+
+                <script>
+                    // Parse the JSON data safely
+                    const doughnutDataElement = document.getElementById('doughnut-data');
+                    const doughnutData = JSON.parse(doughnutDataElement.textContent);
+                    const chartData = [doughnutData.num_bank_accounts, doughnutData.num_credit_card];
+                    
+                    const doughnutLabels = ['Bank Accounts', 'Credit Cards'];
+                    const doughnutCtx = document.getElementById('doughnutChart').getContext('2d');
+                    new Chart(doughnutCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: doughnutLabels,
+                            datasets: [{
+                                data: chartData,
+                                backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+                                borderColor: ['rgba(75, 192, 192, 1)', 'rgba(255, 159, 64, 1)'],
+                                borderWidth: 1
+                            }]
+                        }
+                    });
+                </script>
+
+
+
+                
+                <!-- Tips to Improve Credit Score -->
+                <div class="container mx-auto mt-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-6 rounded-xl shadow-xl hover:scale-105 transform transition-all">
+                    <h3 class="text-3xl font-bold text-white mb-6 text-center">Tips to Improve Your Credit Score</h3>
+                    <ul class="space-y-4 text-lg text-white">
+                        <li class="flex items-center space-x-3 hover:text-yellow-300 transition-all">
+                            <span class="text-2xl text-white"><i class="fas fa-clock"></i></span>
+                            <span>Pay bills on time to avoid late payment penalties.</span>
+                        </li>
+                        <li class="flex items-center space-x-3 hover:text-yellow-300 transition-all">
+                            <span class="text-2xl text-white"><i class="fas fa-credit-card"></i></span>
+                            <span>Reduce credit card balance to less than 30% of your credit limit.</span>
+                        </li>
+                        <li class="flex items-center space-x-3 hover:text-yellow-300 transition-all">
+                            <span class="text-2xl text-white"><i class="fas fa-search"></i></span>
+                            <span>Check your credit report regularly for errors.</span>
+                        </li>
+                        <li class="flex items-center space-x-3 hover:text-yellow-300 transition-all">
+                            <span class="text-2xl text-white"><i class="fas fa-search-minus"></i></span>
+                            <span>Avoid making multiple credit inquiries in a short time.</span>
+                        </li>
+                        <li class="flex items-center space-x-3 hover:text-yellow-300 transition-all">
+                            <span class="text-2xl text-white"><i class="fas fa-money-check-alt"></i></span>
+                            <span>Maintain a mix of credit types (credit cards, loans).</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- FontAwesome CDN -->
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
+
+                <!-- Action Buttons -->
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="{% url 'financial_news' %}" class="bg-purple-600 hover:bg-purple-500 text-white px-6 py-3 rounded-full shadow-md transition-all transform hover:scale-105">Financial News</a>
+                    <a href="{% url 'credit_form' %}" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-full shadow-md transition-all transform hover:scale-105">Update Information</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+{% endblock %}

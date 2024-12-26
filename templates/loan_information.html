@@ -1,0 +1,38 @@
+{% extends 'dashboard.html' %}
+
+{% block title %}Loan Information{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md mx-auto text-center">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Loan Information</h1>
+        
+        <div class="mb-6">
+            <div class="flex justify-between mb-2">
+                <label class="text-gray-700 font-semibold">Credit Score:</label>
+                <span class="text-gray-600">{{ user_credit_score }}</span>
+            </div>
+        </div>
+        
+        <div class="mb-6">
+            <div class="flex justify-between mb-2">
+                <label class="text-gray-700 font-semibold">Eligible Loan Amount:</label>
+                <span class="text-gray-600">${{ eligible_loan_amount|floatformat:2 }}</span>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <a href="{% url 'tariff' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-block">
+                Apply for Loan
+            </a>
+            <!-- <button onclick="window.location.href='{% url 'tariff' %}'" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg">
+                Apply for Loan
+            </button> -->
+        </div>
+    </div>
+</body>
+
+{% endblock %}

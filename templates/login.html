@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<!-- Full screen background image -->
+<div class="bg-cover bg-center h-[calc(135vh-64px)]"
+     style="background-image: url('images/login_bg.jpg');"></div>
+
+<!-- Form container with white background, centered in the viewport -->
+<div class="w-full max-w-md bg-white text-black absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-10 rounded-lg shadow-xl">
+
+    <!-- Title of the form -->
+    <h1 class="text-center text-3xl font-semibold text-gray-800 mb-6">Welcome Back</h1>
+
+    <!-- Form Start -->
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Username field -->
+        <div class="mb-4">
+            <label for="username" class="block text-lg font-medium text-gray-700">Username</label>
+            {{ form.username }}
+            <div class="text-sm text-red-500 mt-1">
+                {{ form.username.errors }}
+            </div>
+        </div>
+
+        <!-- Password field -->
+        <div class="mb-4">
+            <label for="password" class="block text-lg font-medium text-gray-700">Password</label>
+            {{ form.password }}
+            <div class="text-sm text-red-500 mt-1">
+                {{ form.password.errors }}
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="mb-4">
+            <input type="submit" value="Login"
+                   class="w-full bg-blue-600 text-white font-semibold py-3 rounded-md cursor-pointer hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" />
+        </div>
+        
+    </form>
+
+    <!-- Signup Link -->
+    <div class="text-center">
+        <a href="{% url 'signup' %}" class="text-sm text-gray-500 hover:text-blue-600">Don't have an account? Sign up here</a>
+    </div>
+
+</div>
+
+{% endblock %}

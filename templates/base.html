@@ -7,6 +7,8 @@
     <!-- Load static tag -->
     {% load static %}
     <!-- TailwindCSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom Tailwind Config -->
     <script>
@@ -14,15 +16,15 @@
           theme: {
             extend: {
               colors: {
-                primary: '#1E3A8A', // Blue Theme Primary Color
-                secondary: '#60A5FA', // Blue Secondary Color
+                primary: '#050C9C', //'#1E3A8A', // Blue Theme Primary Color
+                secondary: '#3572EF', // '#60A5FA', // Blue Secondary Color
               },
             }
           }
         }
     </script>
 </head>
-<body class="bg-primary text-white">
+<body class="bg-secondary text-white">
     <!-- Navbar -->
     <nav class="bg-primary p-5 flex justify-between items-center">
         <!-- Project Logo -->
@@ -31,9 +33,10 @@
             <h2 class="text-secondary text-xl font-bold">Score_Sense</h2>
         </div>
             <div>
-                <a href="#" class="text-white hover:border-b-2 hover:border-white mx-2">Home</a>
-                <a href="#" class="text-white hover:border-b-2 hover:border-white mx-2">Sign Up</a>
-                <a href="#" class="text-white hover:border-b-2 hover:border-white mx-2">Login</a>
+                <a href="{% url 'dashboard' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Dashboard</a>
+                <a href="{% url 'home' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Home</a>
+                <a href="{% url 'signup' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Sign Up</a>
+                <a href="{% url 'login' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Login</a>
             </div>
         </div>
     </nav>
@@ -45,6 +48,19 @@
 
     <!-- Footer -->
     <footer class="bg-blue-900 text-white text-center py-4 mt-10">
+        <div>
+            <a href="{% url 'about_us' %}" class="text-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">About Us</a>
+            <a href="{% url 'contact' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Contact US</a>
+            <a href="{% url 'help' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Help</a>
+            <a href="{% url 'tc' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Terms & Conditions</a>
+            <a href="{% url 'tariff' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Tariff</a>
+            <a href="{% url 'financial_news' %}" class="ext-white hover:border-white hover:text-white-500 hover:font-semibold mx-4">Financial News</a>
+
+
+        </div>
+        <div>
+            <br>
+        </div>
         <p>&copy; 2024 Score_Sense. All Rights Reserved.</p>
     </footer>
 </body>

@@ -1,0 +1,111 @@
+{% extends 'dashboard.html' %}
+{% load static %}
+
+{% block content %}
+
+<body class="bg-gray-100">
+
+    <main class="p-10">
+        <!-- No Credit Details Message -->
+        <div id="not-filled-msg" class="bg-blue-100 border border-blue-300 p-5 rounded text-center mb-6 hidden">
+            Fill Credit details to get the score and probability of default.
+        </div>
+
+        <!-- Credit Details Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white rounded-lg shadow">
+                    <caption class="bg-white text-lg font-semibold py-3 rounded-t-lg shadow-md">Your Credit Details
+                    </caption>
+                    <thead class="bg-indigo-500 text-white">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-sm font-bold">Sr. no.</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold">Parameter</th>
+                            <th class="px-6 py-3 text-left text-sm font-bold">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        <!-- Rows for each credit detail (replace with dynamic values) -->
+                        <tr class="bg-gray-50">
+                            <td class="px-6 py-4">1</td>
+                            <td class="px-6 py-4">Grade</td>
+                            <td class="px-6 py-4">A</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4">2</td>
+                            <td class="px-6 py-4">Home ownership</td>
+                            <td class="px-6 py-4">Owned</td>
+                        </tr>
+                        <!-- Repeat for other parameters -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Score and Probability Section -->
+            <div class="space-y-6">
+                <!-- Credit Score -->
+                <div class="flex flex-col items-center bg-white p-6 rounded-lg shadow space-y-3">
+                    <h3 class="text-lg font-bold">Your Credit Score</h3>
+                    <div class="relative w-64 h-64 rounded-full bg-gradient-to-r from-blue-500 to-indigo-200">
+                        <div class="absolute inset-2/12 bg-white rounded-full"></div>
+                        <div
+                            class="absolute inset-0 flex justify-center items-center text-5xl font-semibold text-gray-700">
+                            <span id="credit-score-display">300</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probability of Default -->
+                <div class="flex flex-col items-center bg-white p-6 rounded-lg shadow space-y-3">
+                    <h3 class="text-lg font-bold">Your Probability Of Default</h3>
+                    <div class="relative w-64 h-64 rounded-full bg-gradient-to-r from-blue-500 to-indigo-200">
+                        <div class="absolute inset-2/12 bg-white rounded-full"></div>
+                        <div
+                            class="absolute inset-0 flex justify-center items-center text-5xl font-semibold text-gray-700">
+                            <span id="probability-display">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Dynamic values (simulating data)
+        const creditScore = 720;
+        const probabilityOfDefault = 15;
+
+        // Credit Score Progress Bar
+        const progressBarCS = document.querySelector("#credit-score-display");
+        const progressEndValueCS = Math.round((creditScore - 300) / (850 - 300) * 100);
+        let progressValueCS = 300;
+
+        const progressCS = setInterval(() => {
+            progressValueCS++;
+            progressBarCS.textContent = progressValueCS;
+            if (progressValueCS === creditScore) {
+                clearInterval(progressCS);
+            }
+        }, 20);
+
+        // Probability of Default Progress Bar
+        const progressBarPD = document.querySelector("#probability-display");
+        let progressValuePD = 0;
+
+        const progressPD = setInterval(() => {
+            progressValuePD++;
+            progressBarPD.textContent = `${progressValuePD}%`;
+            if (progressValuePD === probabilityOfDefault) {
+                clearInterval(progressPD);
+            }
+        }, 20);
+
+        // Simulate if credit details are missing
+        const creditDetailsAvailable = true;
+        if (!creditDetailsAvailable) {
+            document.getElementById("not-filled-msg").classList.remove("hidden");
+        }
+    </script>
+
+</body>
+{% endblock content %}

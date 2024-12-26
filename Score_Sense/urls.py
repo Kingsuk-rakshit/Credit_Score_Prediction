@@ -16,12 +16,35 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from webapp.views import home_view
+from webapp.views import home
+from webapp import views as webapp_views
 from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view, name="home"),  # Home page route
+    path('', home, name="home"),  # Home page route
+    path('signup/', webapp_views.signup_view, name='signup'),  # Signup page
+    path('login/', webapp_views.login_view, name='login'),  # Login page
+    path('credit_form/', webapp_views.credit_form, name='credit_form'),  # credit form page
+    path('about_us/', webapp_views.about_us, name='about_us'),  # About us page
+    path('contact/', webapp_views.contact, name='contact'),  # Contact page
+    path('help/', webapp_views.help, name='help'),  # Help page
+    path('tc/', webapp_views.tc, name='tc'),  # Terms and COnditions page
+    path('tariff/', webapp_views.tariff, name='tariff'),  # tariff page
+    path('dashboard/', webapp_views.dashboard, name='dashboard'),  # user_dashboard page
+    path('user_home/', webapp_views.user_home, name='user_home'),  # user_home page
+    path('loan_information/', webapp_views.loan_information, name='loan_information'),  # loan information page
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('credit_form/', webapp_views.credit_form, name='credit_form'),
+    path('feedback/', webapp_views.feedback_form, name='feedback_form'),
+    path('thank-you/', webapp_views.thank_you, name='thank_you'),
+    path('financial_news/', webapp_views.fetch_financial_news, name='financial_news'),
+
+
 ]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

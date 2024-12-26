@@ -1,64 +1,102 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
 <!-- Banner Section -->
-<div class="bg-secondary h-[94vh] flex items-center px-5">
+<div class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 h-[94vh] flex items-center px-5">
     <div class="w-full md:w-1/2">
-        <h4 class="text-white mb-4 text-lg">It’s easy and free to see where you stand</h4>
-        <h1 class="text-white text-5xl font-extrabold mb-6">Check your credit risk assessment</h1>
-        <p class="text-white text-justify mb-6">
+        <h1 class="text-white text-6xl font-extrabold mb-6 animate__animated animate__fadeInLeft">Welcome,</h1>
+        <h1 class="text-black text-6xl font-bold mb-6 animate__animated animate__fadeInLeft"> {{ user.username }}!</h1>
+        <h4 class="text-white mb-4 text-lg font-medium">It’s easy and free to see where you stand</h4>
+        <h2 class="text-white text-6xl font-extrabold mb-6 animate__animated animate__fadeInLeft">Check your credit risk assessment</h2>
+        <p class="text-white text-lg mb-6 animate__animated animate__fadeInLeft">
             Checking your credit history and credit risk assessment can help you better
             understand your current credit position. Regularly checking your
             credit reports can help you be more aware of what lenders may see.
         </p>
-        <div>
-            <a href="#" class="inline-block bg-white text-primary py-2 px-4 rounded-full hover:bg-primary hover:text-white mr-2">Get Score</a>
-            <a href="#main" class="inline-block bg-transparent border border-white text-white py-2 px-4 rounded-full hover:bg-white hover:text-primary">About</a>
+        <div class="animate__animated animate__fadeInLeft">
+            <a href="{% url 'credit_form' %}" class="inline-block bg-white text-primary py-3 px-6 rounded-full hover:bg-primary hover:text-white transition-all duration-300 mr-4">Get Score</a>
+            <a href="#main" class="inline-block bg-transparent border-2 border-white text-white py-3 px-6 rounded-full hover:bg-white hover:text-primary transition-all duration-300">About</a>
         </div>
     </div>
     <div class="hidden md:block md:w-1/2 flex justify-center">
-        <img src="{% static 'images\credit-score-wheel.png' %}" alt="Credit Score Wheel" class="w-3/4">
+        <img src="{% static 'images/credit-score-wheel.png' %}" alt="Credit Score Wheel" class="w-3/4 transform hover:scale-105 transition-all duration-300">
     </div>
 </div>
 
 <!-- Main Section -->
-<div id="main" class="py-16">
-    <h2 class="text-center text-3xl font-bold text-white mb-8">Learn, Plan, Protect. All in one place. Here's how.</h2>
+<div id="main" class="py-16 bg-gradient-to-t from-blue-700 to-indigo-800">
+    <h2 class="text-center text-4xl font-extrabold text-white mb-8 animate__animated animate__fadeInUp">Learn, Plan, Protect. All in one place. Here's how.</h2>
     <div class="flex flex-wrap justify-evenly items-center">
         <!-- Section 1 -->
-        <div class="w-full md:w-1/3 mb-8 p-4 bg-blue-700 rounded-lg shadow-lg">
+        <div class="w-full md:w-1/3 mb-8 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="mb-4">
-                <img src="{% static 'images\web_image1.jpg' %}" alt="What is credit score?" class="rounded-md w-full">
+                <img src="{% static 'images/web_image1.jpg' %}" alt="What is credit score?" class="rounded-xl w-full">
             </div>
-            <h3 class="text-xl font-bold mb-2">What is credit score?</h3>
-            <p class="text-gray-300">
+            <h3 class="text-2xl font-bold mb-2 text-gray-800">What is credit score?</h3>
+            <a href="https://www.cibil.com/blog/first-time-users-guide-to-establishing-credit"  class="text-blue-600 hover:border-white hover:text-white-500 hover:font-semibold mx-4">
                 A credit score is a number from 300 to 850 that rates a consumer’s creditworthiness...
-            </p>
+            </a>
         </div>
 
         <!-- Section 2 -->
-        <div class="w-full md:w-1/3 mb-8 p-4 bg-blue-700 rounded-lg shadow-lg">
+        <div class="w-full md:w-1/3 mb-8 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="mb-4">
-                <img src="{% static 'images\web_image2.jpg' %}" alt="Why you should calculate it?" class="rounded-md w-full">
+                <img src="{% static 'images/web_image2.jpg' %}" alt="Why you should calculate it?" class="rounded-xl w-full">
             </div>
-            <h3 class="text-xl font-bold mb-2">Why you should calculate it?</h3>
-            <p class="text-gray-300">
+            <h3 class="text-2xl font-bold mb-2 text-gray-800">Why you should calculate it?</h3>
+            <a href="https://www.cibil.com/blog/new-to-credit-heres-how-to-maintain-a-healthy-cibil-score" class="text-blue-600 hover:border-white hover:text-white-500 hover:font-semibold mx-4">
                 Companies use credit scores to make decisions...
-            </p>
+            </a>
         </div>
 
         <!-- Section 3 -->
-        <div class="w-full md:w-1/3 mb-8 p-4 bg-blue-700 rounded-lg shadow-lg">
+        <div class="w-full md:w-1/3 mb-8 p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
             <div class="mb-4">
-                <img src="{% static 'images\web_image3.jpg' %}" alt="What can damage your credit score?" class="rounded-md w-full">
+                <img src="{% static 'images/web_image3.jpg' %}" alt="What can damage your credit score?" class="rounded-xl w-full">
             </div>
-            <h3 class="text-xl font-bold mb-2">What can damage your credit score?</h3>
-            <p class="text-gray-300">
+            <h3 class="text-2xl font-bold mb-2 text-gray-800">What can damage your credit score?</h3>
+            <a href="https://www.cibil.com/blog/safeguarding-your-credit-profile" class="text-blue-600 hover:border-white hover:text-white-500 hover:font-semibold mx-4">
                 Making a late payment, high debt to credit utilization, and other factors...
-            </p>
+            </a>
         </div>
+        <div id="newsSlider" class="relative w-full max-w-5xl mx-auto text-center">
+            <!-- Slider Items -->
+            <div class="text-white text-4xl lg:text-6xl font-bold py-10 animate__animated animate__fadeInLeft hover:border-2 hover:text-black hover:font-awesome mx-4">
+                <a href="{% url 'financial_news' %}" id="sliderText">Want to Stay Updated on FINANCIAL NEWS...</a>
+            </div>
+        
+            <!-- Controls -->
+            <div class="flex justify-center space-x-4 mt-4">
+                <button onclick="changeSlide(0)" class="w-3 h-3 bg-white rounded-full"></button>
+                <button onclick="changeSlide(1)" class="w-3 h-3 bg-white rounded-full"></button>
+                <button onclick="changeSlide(2)" class="w-3 h-3 bg-white rounded-full"></button>
+            </div>
+        </div>
+        
+        <script>
+            const messages = [
+                "Want to Stay Updated on FINANCIAL NEWS...",
+                "Get the Latest Insights on Markets & Economy...",
+                "Don’t Miss Out on Important Financial Updates!"
+            ];
+            let currentIndex = 0;
+        
+            function changeSlide(index) {
+                currentIndex = index;
+                document.getElementById('sliderText').textContent = messages[index];
+            }
+        
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % messages.length;
+                changeSlide(currentIndex);
+            }, 4000);
+        </script>
+        
+        <!-- <a href="href="{% url 'financial_news' %}"><h1 class="text-white text-6xl font-extrabold mb-6 animate__animated animate__fadeInLeft">  You Want To Stay Updated on FINANCIAL NEWS...</h1></a> -->
+
     </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
 {% endblock content %}
